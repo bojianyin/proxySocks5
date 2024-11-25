@@ -5,15 +5,56 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SelectLineActivity">
+    tools:context=".SelectLineActivity"
+    android:background="#F5F7FB">
+    <RelativeLayout
+        android:id="@+id/rl_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingVertical="5dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:paddingHorizontal="16.0dp"
+        >
+        <ImageView
+            android:layout_width="118dp"
+            android:layout_height="36dp"
+            android:src="@mipmap/logo"
+            android:layout_alignParentStart="true"
+            />
+        <TextView
+            android:id="@+id/tv_lang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:drawableLeft="@mipmap/ic_language"
+            android:text="简体中文"
+            android:drawablePadding="3dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            />
+
+    </RelativeLayout>
+    <ImageView
+        android:id="@+id/iv_banner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/im_banner"
+        app:layout_constraintTop_toBottomOf="@id/rl_header"
+        android:scaleType="fitXY"
+        android:layout_marginHorizontal="16.0dp"
+        />
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tool_header"
         android:layout_width="match_parent"
         android:layout_height="44.0dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_banner"
         app:title="请选择线路"
+        app:titleTextAppearance="@style/title_line"
         >
         <TextView
             android:id="@+id/tv_line_update"
@@ -21,15 +62,23 @@
             android:layout_height="wrap_content"
             android:text="更新线路"
             android:layout_gravity="end"
+            android:textColor="@color/black"
+            android:textSize="14sp"
             android:layout_marginRight="16.0dp"
+            android:drawableLeft="@mipmap/ic_refresh_line"
+            android:drawablePadding="3dp"
             />
         <TextView
             android:id="@+id/tv_refresh"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="测速"
+            android:textColor="@color/black"
+            android:textSize="14sp"
             android:layout_gravity="end"
             android:layout_marginRight="16.0dp"
+            android:drawableLeft="@mipmap/ic_test_speed"
+            android:drawablePadding="3dp"
             />
     </androidx.appcompat.widget.Toolbar>
 
@@ -41,14 +90,23 @@
         android:layout_marginHorizontal="16.0dp"
         android:layout_marginTop="12.0dp"
         />
-    <Button
+    <RelativeLayout
         android:id="@+id/btn_confirm"
         android:layout_width="match_parent"
-        android:layout_height="44.0dp"
-        android:textColor="@color/black"
-        android:text="确认"
+        android:layout_height="45dp"
         app:layout_constraintTop_toBottomOf="@id/rv_line"
-        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_button"
         android:layout_marginHorizontal="16.0dp"
-        />
+        android:layout_marginTop="24.0dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="确认"
+            android:layout_centerInParent="true"
+            android:textSize="16.0sp"
+            />
+    </RelativeLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

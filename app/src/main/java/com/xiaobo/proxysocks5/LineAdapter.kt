@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class LineAdapter(val dataList:List<Line>) : RecyclerView.Adapter<LineHolder>(){
     var listener: MyOnClickListener? = null
+    var currentPosition:Int = 0
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LineHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_line,parent,false)
         return LineHolder(itemView)
@@ -27,9 +28,11 @@ class LineAdapter(val dataList:List<Line>) : RecyclerView.Adapter<LineHolder>(){
              "$`it`ms"
         } ?: "--"
 
-        val drawable = ContextCompat.getDrawable(holder.itemView.context,if(dataList[position].isCheck) android.R.drawable.checkbox_on_background else android.R.drawable.checkbox_off_background)
+        val drawable = ContextCompat.getDrawable(holder.itemView.context,if(dataList[position].isCheck) R.mipmap.ic_checked else R.mipmap.ic_uncheck)
         holder.vRadio.setImageDrawable(drawable)
+        holder.itemView.isSelected = currentPosition == position
         holder.itemView.setOnClickListener{
+            currentPosition = position
             listener?.click(position)
         }
     }
