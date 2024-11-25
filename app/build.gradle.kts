@@ -45,6 +45,10 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    implementation("androidx.webkit:webkit:1.4.0")
+    implementation(libs.webkit)
+    // 基础依赖包，必须要依赖
+    implementation(libs.immersionbar)
+    // kotlin扩展（可选）
+    implementation(libs.immersionbar.ktx)
 
 }

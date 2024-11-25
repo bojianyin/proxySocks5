@@ -17,6 +17,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.gyf.immersionbar.ktx.immersionBar
 
 class SelectLineActivity : AppCompatActivity() {
     private val TAG:String = "SelectLineActivity"
@@ -32,6 +33,11 @@ class SelectLineActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_select_line)
+        immersionBar {
+            statusBarColor(R.color.bg_color)
+            fitsSystemWindows(true)
+            statusBarDarkFont(true)
+        }
         sharedPreferences = getSharedPreferences("user",MODE_PRIVATE)
 
 
