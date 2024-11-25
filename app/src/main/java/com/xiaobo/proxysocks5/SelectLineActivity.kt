@@ -2,6 +2,7 @@ package com.xiaobo.proxysocks5
 
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Rect
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -11,6 +12,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,8 +23,9 @@ class SelectLineActivity : AppCompatActivity() {
     private val dataList:ArrayList<Line> by lazy { arrayListOf() }
     private val rvView:RecyclerView by lazy { findViewById(R.id.rv_line) }
     private val tvRefresh: TextView by lazy { findViewById(R.id.tv_refresh) }
-    private val btnConfirm: Button by lazy { findViewById(R.id.btn_confirm) }
+    private val btnConfirm: View by lazy { findViewById(R.id.btn_confirm) }
     private val tvLineUpdate: TextView by lazy { findViewById(R.id.tv_line_update) }
+    private val tvLang: TextView by lazy { findViewById(R.id.tv_lang) }
     private var currentLine:Line? = null
     private lateinit var adapter:LineAdapter
     private lateinit var sharedPreferences:SharedPreferences
@@ -68,6 +71,18 @@ class SelectLineActivity : AppCompatActivity() {
         tvLineUpdate.setOnClickListener {
             pullRemoteLines()
         }
+
+        val tvLineUpdateDrawable = ContextCompat.getDrawable(this,R.mipmap.ic_refresh_line)
+        tvLineUpdateDrawable?.bounds = Rect(0,0,DensityUtils.dpToPx(this,20.0f),DensityUtils.dpToPx(this,20.0f))
+        tvLineUpdate.setCompoundDrawablesRelative(tvLineUpdateDrawable,null,null,null)
+
+        val tvRefreshDrawable = ContextCompat.getDrawable(this,R.mipmap.ic_test_speed)
+        tvRefreshDrawable?.bounds = Rect(0,0,DensityUtils.dpToPx(this,20.0f),DensityUtils.dpToPx(this,20.0f))
+        tvRefresh.setCompoundDrawablesRelative(tvRefreshDrawable,null,null,null)
+
+        val tvLangDrawable = ContextCompat.getDrawable(this,R.mipmap.ic_language)
+        tvLangDrawable?.bounds = Rect(0,0,DensityUtils.dpToPx(this,20.0f),DensityUtils.dpToPx(this,20.0f))
+        tvLang.setCompoundDrawablesRelative(tvLangDrawable,null,null,null)
     }
 
 
@@ -113,10 +128,12 @@ class SelectLineActivity : AppCompatActivity() {
     }
 
     fun selectLine(ip:String){
-        for(item:Line in dataList){
+        for(itm in dataList.withIndex()){
+            val item = itm.value
             if(item.ip.equals(ip)){
                 item.isCheck = true
                 currentLine = item
+                adapter.currentPosition = itm.index
             }else{
                 item.isCheck = false
             }
