@@ -111,7 +111,7 @@ class SelectLineActivity : AppCompatActivity() {
         }else{
             val lineJson = sharedPreferences.getString("lineStr","")
             if(lineJson.isNullOrEmpty()){
-                dataList.add(Line(0,"线路1","8.134.174.221"))//8.134.178.58
+                dataList.add(Line(0,"线路1","8.134.178.58"))//8.134.178.58
                 dataList.add(Line(1,"线路2","47.122.49.115"))
                 dataList.add(Line(2,"线路3","47.122.52.242"))
                 dataList.add(Line(3,"线路4","118.178.194.115"))
@@ -129,8 +129,8 @@ class SelectLineActivity : AppCompatActivity() {
     }
 
     fun reSetLine(){
-        val prevLine = sharedPreferences.getString("lineIp","")
-        selectLine(prevLine?:"")
+        val prevLine = sharedPreferences.getString("lineIp",null)
+        selectLine(prevLine?:dataList[0].ip)
     }
 
     fun selectLine(ip:String){
