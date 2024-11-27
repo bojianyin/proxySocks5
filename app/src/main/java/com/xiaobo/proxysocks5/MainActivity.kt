@@ -1,16 +1,19 @@
 package com.xiaobo.proxysocks5
 
 import android.content.Intent
+import android.graphics.Bitmap
 import android.net.VpnService
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.KeyEvent
 import android.view.View
 import android.webkit.ConsoleMessage
 import android.webkit.HttpAuthHandler
 import android.webkit.JsResult
 import android.webkit.WebChromeClient
 import android.webkit.WebResourceRequest
+import android.webkit.WebResourceResponse
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
@@ -114,6 +117,7 @@ class MainActivity : AppCompatActivity() {
                 view: WebView?,
                 request: WebResourceRequest?
             ): Boolean {
+                setProxy()
                 view?.loadUrl(request?.url?.toString()?:"")
                 return false
             }
@@ -124,7 +128,60 @@ class MainActivity : AppCompatActivity() {
                 host: String?,
                 realm: String?
             ) {
+                setProxy()
                 super.onReceivedHttpAuthRequest(view, handler, host, realm)
+            }
+
+            override fun onLoadResource(view: WebView?, url: String?) {
+                super.onLoadResource(view, url)
+                setProxy()
+            }
+
+            override fun shouldInterceptRequest(
+                view: WebView?,
+                request: WebResourceRequest?
+            ): WebResourceResponse? {
+                setProxy()
+                return super.shouldInterceptRequest(view, request)
+            }
+
+            override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
+                setProxy()
+                super.onPageStarted(view, url, favicon)
+
+            }
+
+            override fun onPageFinished(view: WebView?, url: String?) {
+                setProxy()
+                super.onPageFinished(view, url)
+
+            }
+
+            override fun onPageCommitVisible(view: WebView?, url: String?) {
+                setProxy()
+                super.onPageCommitVisible(view, url)
+
+            }
+
+            override fun onReceivedLoginRequest(
+                view: WebView?,
+                realm: String?,
+                account: String?,
+                args: String?
+            ) {
+                setProxy()
+                super.onReceivedLoginRequest(view, realm, account, args)
+
+            }
+
+            override fun shouldOverrideKeyEvent(view: WebView?, event: KeyEvent?): Boolean {
+                setProxy()
+                return super.shouldOverrideKeyEvent(view, event)
+            }
+
+            override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
+                setProxy()
+                return super.shouldOverrideUrlLoading(view, url)
             }
 
         }
